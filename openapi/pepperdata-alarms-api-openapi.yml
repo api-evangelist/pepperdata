@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  title: Pepperdata REST Alarms API
+  version: '1.0'
+  description: The Pepperdata REST API provides programmatic access to observability data that is also available through the Pepperdata dashboard. You can retrieve time-series metrics, series, and filters (/m), query application/job details and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes workloads (/jobdetails), and create, retrieve, revise, and delete alarms (/alarms). All returned data is JSON unless otherwise specified.
+  contact:
+    name: Pepperdata Support
+    url: https://support.pepperdata.com/
+  x-generated: '2026-07-20'
+  x-method: generated
+  x-source: https://docs.pepperdata.com/rest-api/
+servers:
+- url: https://dashboard.pepperdata.com/{realm}/api
+  description: Pepperdata installation base URL. REALM is the URL segment associated with the cluster/realm whose resources you are accessing.
+  variables:
+    realm:
+      default: pepperdata-demonstration
+      description: Your Pepperdata realm/cluster name.
+security:
+- PDAPIAuth: []
+tags:
+- name: Alarms
+  description: Create, retrieve, revise, and delete metric alarms.
+paths:
+  /alarms:
+    get:
+      operationId: listAlarms
+      tags:
+      - Alarms
+      summary: List configured alarms
+      description: Retrieve a list of configured alarms in JSON format for the realm.
+      responses:
+        '200':
+          description: An array of alarm objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAlarm
+      tags:
+      - Alarms
+      summary: Create an alarm
+      description: Create an alarm for the realm.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Alarm'
+      responses:
+        '200':
+          description: The created alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /alarms/status:
+    get:
+      operationId: listFiringAlarms
+      tags:
+      - Alarms
+      summary: List firing alarms
+      description: Retrieve a list of firing (active) alarms.
+      responses:
+        '200':
+          description: An array of firing alarm objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /alarms/app/{appId}:
+    get:
+      operationId: listAlarmsByApp
+      tags:
+      - Alarms
+      summary: List alarms for an app/job
+      description: Retrieve a list of alarms associated with a specific app/job ID.
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: The app/job ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of alarm objects for the app.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /alarms/{alarmId}:
+    get:
+      operationId: getAlarm
+      tags:
+      - Alarms
+      summary: Get an alarm
+      description: Retrieve the configuration of a specific alarm by ID.
+      parameters:
+      - $ref: '#/components/parameters/AlarmId'
+      responses:
+        '200':
+          description: The alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateAlarm
+      tags:
+      - Alarms
+      summary: Revise an alarm
+      description: Revise an existing alarm. For fields that should remain unchanged, match the alarm's existing values exactly; omitted fields are overwritten with their defaults.
+      parameters:
+      - $ref: '#/components/parameters/AlarmId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Alarm'
+      responses:
+        '200':
+          description: The updated alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAlarm
+      tags:
+      - Alarms
+      summary: Delete an alarm
+      description: Delete an alarm by ID.
+      parameters:
+      - $ref: '#/components/parameters/AlarmId'
+      responses:
+        '200':
+          description: The alarm was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    AlarmId:
+      name: alarmId
+      in: path
+      required: true
+      description: Pepperdata-assigned unique alarm ID.
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or a required alarm field was invalid.
+    Unauthorized:
+      description: Missing or invalid API key.
+  schemas:
+    Threshold:
+      type: object
+      description: Object containing the alarm firing criteria.
+      properties:
+        value:
+          type: number
+          format: float
+          description: Value above/below which the alarm fires (per extremumOperator).
+        windowMinutes:
+          type: integer
+          default: 5
+          description: Duration in minutes over which percentOfTime is applied.
+        percentOfTime:
+          type: integer
+          default: 1
+          minimum: 0
+          maximum: 100
+          description: Percentage of windowMinutes the metric must breach before firing.
+        extremumOperator:
+          type: string
+          enum:
+          - MAX
+          - MIN
+          default: MAX
+          description: MAX for an upper threshold, MIN for a lower threshold.
+      required:
+      - value
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Pepperdata-assigned unique number for the alarm.
+        title:
+          type: string
+          description: User-specified alphanumeric string describing the alarm.
+        enabled:
+          type: boolean
+          default: true
+          description: Alarm enabled/disabled flag. Omit or true to enable; false to disable.
+        queryParams:
+          type: string
+          description: Dashboard query for the alarm's metrics.
+        threshold:
+          $ref: '#/components/schemas/Threshold'
+        createdTime:
+          type: string
+          readOnly: true
+          description: Time the alarm was created.
+        updatedTime:
+          type: string
+          readOnly: true
+          description: Time the alarm was most recently updated.
+        targetEmails:
+          type: string
+          description: Comma-separated list of email override addresses to receive alert notifications when the alarm fires and clears.
+      required:
+      - title
+      - queryParams
+      - threshold
+  securitySchemes:
+    PDAPIAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Send the header `Authorization: PDAPI <API-key-id>:<API-key-token>`. Obtain a key at https://dashboard.pepperdata.com/account/apikeys and click Create API Key. A key is reusable until deleted or revoked.'

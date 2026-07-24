@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: Pepperdata REST Alarms Metrics API
+  version: '1.0'
+  description: The Pepperdata REST API provides programmatic access to observability data that is also available through the Pepperdata dashboard. You can retrieve time-series metrics, series, and filters (/m), query application/job details and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes workloads (/jobdetails), and create, retrieve, revise, and delete alarms (/alarms). All returned data is JSON unless otherwise specified.
+  contact:
+    name: Pepperdata Support
+    url: https://support.pepperdata.com/
+  x-generated: '2026-07-20'
+  x-method: generated
+  x-source: https://docs.pepperdata.com/rest-api/
+servers:
+- url: https://dashboard.pepperdata.com/{realm}/api
+  description: Pepperdata installation base URL. REALM is the URL segment associated with the cluster/realm whose resources you are accessing.
+  variables:
+    realm:
+      default: pepperdata-demonstration
+      description: Your Pepperdata realm/cluster name.
+security:
+- PDAPIAuth: []
+tags:
+- name: Metrics
+  description: Retrieve time-series metrics, series, and filters.
+paths:
+  /m:
+    get:
+      operationId: getMetrics
+      tags:
+      - Metrics
+      summary: Query metrics, series, and filters
+      description: Retrieve time-series metrics. Add breakdowns/filters with keys such as h (host), u (user), q (queue), c (control domain), j (job sequence id), tt (task type); use * for a full breakdown, a literal for a filter, or /regex/ for a regex match.
+      parameters:
+      - name: s
+        in: query
+        required: true
+        description: Start time (YYYY/MM/DD-HH:mm).
+        schema:
+          type: string
+      - name: e
+        in: query
+        required: true
+        description: End time (YYYY/MM/DD-HH:mm).
+        schema:
+          type: string
+      - name: tzo
+        in: query
+        description: Time zone offset from UTC in hours.
+        schema:
+          type: integer
+      - name: m
+        in: query
+        required: true
+        description: Metric to access (see Metric Definitions on the dashboard).
+        schema:
+          type: string
+      - name: sample
+        in: query
+        description: Sample interval in ms (required if targetpoints not set). Minimum 5000.
+        schema:
+          type: integer
+          minimum: 5000
+      - name: targetpoints
+        in: query
+        description: Target number of points (required if sample not set).
+        schema:
+          type: integer
+      - name: ms
+        in: query
+        description: Maximum series to return (default 20).
+        schema:
+          type: integer
+          default: 20
+      - name: nohostsreporting
+        in: query
+        description: Set to 1 to omit hostsreporting from the response.
+        schema:
+          type: integer
+          enum:
+          - 1
+      - name: omitpoints
+        in: query
+        description: Set to "all" to omit all datapoints.
+        schema:
+          type: string
+          enum:
+          - all
+      - name: downsampler
+        in: query
+        description: Set to "percentile" to split a single series into percentiles by time.
+        schema:
+          type: string
+          enum:
+          - percentile
+      - name: format
+        in: query
+        description: Response format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          default: json
+      - name: omitaggregates
+        in: query
+        description: Set to 1 to omit aggregate series.
+        schema:
+          type: integer
+          enum:
+          - 1
+      - name: dataonly
+        in: query
+        description: Set to 1 to omit progress updates and instrumentation data.
+        schema:
+          type: integer
+          enum:
+          - 1
+      - name: h
+        in: query
+        description: Host breakdown/filter (* / literal / /regex/).
+        schema:
+          type: string
+      - name: u
+        in: query
+        description: User breakdown/filter.
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Queue breakdown/filter.
+        schema:
+          type: string
+      - name: c
+        in: query
+        description: Control-domain breakdown/filter.
+        schema:
+          type: string
+      - name: j
+        in: query
+        description: Job-sequence-id breakdown/filter.
+        schema:
+          type: string
+      - name: tt
+        in: query
+        description: Task-type breakdown/filter.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Metrics response.
+          content:
+            application/json:
+              schema:
+                type: object
+            text/csv:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+  securitySchemes:
+    PDAPIAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Send the header `Authorization: PDAPI <API-key-id>:<API-key-token>`. Obtain a key at https://dashboard.pepperdata.com/account/apikeys and click Create API Key. A key is reusable until deleted or revoked.'
