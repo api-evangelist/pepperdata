@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/pepperdata
+notes: >-
+  Pepperdata publishes no client SDK for the REST API (the guide recommends
+  cURL and a Python sample/decryption script). The one first-party, product-
+  facing published package is the Grafana datasource plugin, which surfaces
+  Pepperdata metrics inside Grafana. Listed as a package/integration, not a
+  REST API client library.
+packages:
+  - language: typescript
+    registry: github
+    name: pepperdata-grafana-datasource
+    url: https://github.com/pepperdata/pepperdata-grafana-datasource
+    install: 'See repo README (Grafana datasource plugin)'
+    official: true
+    kind: grafana-datasource

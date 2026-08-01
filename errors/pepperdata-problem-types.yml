@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/pepperdata-rest-api-openapi.yml
+format: http-status
+notes: >-
+  Derived from the OpenAPI response set. The Pepperdata REST API User's Guide
+  does not publish an RFC 9457 problem+json error registry; errors are signaled
+  by HTTP status code with a JSON body. Titles/remediation below are derived
+  from documented auth and validation behavior.
+problems:
+  - status: 400
+    title: Bad request
+    detail: >-
+      A required alarm field was missing or invalid. On PUT /alarms/{id}, omitted
+      fields are overwritten with their defaults, so send the full desired object.
+    remediation: >-
+      Match the Alarm schema (title, queryParams, threshold.value required);
+      include all fields you want preserved.
+    source_operations:
+      - openapi/pepperdata-rest-api-openapi.yml#createAlarm
+      - openapi/pepperdata-rest-api-openapi.yml#updateAlarm
+  - status: 401
+    title: Unauthorized
+    detail: Missing or invalid API key in the Authorization header.
+    remediation: >-
+      Send `Authorization: PDAPI <API-key-id>:<API-key-token>` with a key created
+      at https://dashboard.pepperdata.com/account/apikeys; ensure it is not revoked.
+    source_operations:
+      - openapi/pepperdata-rest-api-openapi.yml#listAlarms
+      - openapi/pepperdata-rest-api-openapi.yml#getMetrics
+      - openapi/pepperdata-rest-api-openapi.yml#getJobDetails
+  - status: 404
+    title: Resource not found
+    detail: The requested alarm ID or app ID does not exist in the realm.
+    remediation: Verify the alarm/app ID and the realm segment in the base URL.
+    source_operations:
+      - openapi/pepperdata-rest-api-openapi.yml#getAlarm
+      - openapi/pepperdata-rest-api-openapi.yml#deleteAlarm
+      - openapi/pepperdata-rest-api-openapi.yml#listAlarmsByApp

@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Pepperdata REST API
+  version: 1.0.0
+extends: openapi/pepperdata-rest-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-api-source: https://docs.pepperdata.com/rest-api/
+      x-artifact-authentication: authentication/pepperdata-authentication.yml
+      x-artifact-conventions: conventions/pepperdata-conventions.yml
+      x-artifact-errors: errors/pepperdata-problem-types.yml
+      x-artifact-data-model: data-model/pepperdata-data-model.yml
+  - target: $.info
+    update:
+      x-agent-notes: >-
+        Read-heavy observability API. /m and /jobdetails are GET-only query
+        surfaces; /alarms is full CRUD. Custom PDAPI header auth, no OAuth, no
+        idempotency key, cursor pagination on /jobdetails via filterjobidsafter.

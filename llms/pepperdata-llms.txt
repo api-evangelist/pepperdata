@@ -1,0 +1,29 @@
+# Pepperdata
+
+> Pepperdata provides dynamic Kubernetes resource optimization for data workloads, increasing utilization, improving performance, and reducing cost in real time. Its REST API gives programmatic access to observability data also available in the Pepperdata dashboard: time-series metrics, application/job details with tuning recommendations (Spark, MapReduce, Tez, Kubernetes), and metric alarms.
+
+## API
+
+- [Pepperdata REST API guide](https://docs.pepperdata.com/rest-api/): Endpoints for metrics (/m), job details (/jobdetails), and alarms (/alarms). Base URL is dashboard.pepperdata.com/{realm}/api.
+- [Authentication](https://docs.pepperdata.com/rest-api/00-common-api/): API key sent as `Authorization: PDAPI <id>:<token>`; keys created at dashboard.pepperdata.com/account/apikeys.
+- [/alarms reference](https://docs.pepperdata.com/rest-api/zz-alarms/): Create, retrieve, revise, and delete metric alarms.
+- [/jobdetails reference](https://docs.pepperdata.com/rest-api/zz-jobdetails/): Query app/job details, counters, and recommendations.
+- [/m (metrics) reference](https://docs.pepperdata.com/rest-api/zz-metrics/): Time-series metrics, series, and filters.
+- [Decrypt returned data](https://docs.pepperdata.com/rest-api/03-decrypt-returned-data/): Python script for installations that add application-layer encryption.
+
+## Specs
+
+- [OpenAPI (API Evangelist, generated from docs)](openapi/pepperdata-rest-api-openapi.yml)
+- [Authentication profile](authentication/pepperdata-authentication.yml)
+- [API conventions](conventions/pepperdata-conventions.yml)
+- [Error catalog](errors/pepperdata-problem-types.yml)
+- [Data model](data-model/pepperdata-data-model.yml)
+- [MCP candidate tools](mcp/pepperdata-mcp.yml)
+
+## Docs
+
+- [Documentation portal](https://docs.pepperdata.com/)
+- [Blog](https://www.pepperdata.com/blog/)
+- [Pricing](https://www.pepperdata.com/pricing/)
+- [Support](https://support.pepperdata.com/)
+- [GitHub organization](https://github.com/pepperdata)

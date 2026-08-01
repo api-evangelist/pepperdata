@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/pepperdata-rest-api-openapi.yml
+notes: >-
+  Cross-cutting standards posture derived from the OpenAPI and REST API guide.
+  Pepperdata's REST API uses a custom API-key scheme (no OAuth2/OIDC) and does
+  not publish RFC 9457 problem details.
+standards:
+  - id: rest
+    conforms: true
+    evidence: HTTP verbs GET/POST/PUT/DELETE over resource URLs returning JSON.
+  - id: apikey-auth
+    conforms: true
+    evidence: Authorization header custom scheme "PDAPI <id>:<token>".
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme; API-key auth only.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are plain HTTP status codes; no application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: /jobdetails paginates via filterjobidsafter cursor with a limit cap.
+  - id: tls
+    conforms: true
+    evidence: All communications HTTPS; TLS 1.2+ required.
+  - id: fhir-r4
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: odata
+    conforms: false

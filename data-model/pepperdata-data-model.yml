@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/pepperdata-rest-api-openapi.yml
+notes: >-
+  Entity graph derived from the OpenAPI schemas and the /jobdetails and /m
+  argument surfaces. The Metric and JobDetail entities are query surfaces
+  (no published response schema), modeled from documented query dimensions.
+entities:
+  - name: Alarm
+    description: A metric alarm that fires when a query's series crosses a threshold.
+    source: openapi/pepperdata-rest-api-openapi.yml#/components/schemas/Alarm
+    fields: [id, title, enabled, queryParams, threshold, createdTime, updatedTime, targetEmails]
+    id_field: id
+  - name: Threshold
+    description: Firing criteria embedded in an Alarm.
+    source: openapi/pepperdata-rest-api-openapi.yml#/components/schemas/Threshold
+    fields: [value, windowMinutes, percentOfTime, extremumOperator]
+  - name: JobDetail
+    description: An application/job (Spark, MapReduce, Tez, or Kubernetes) with counters and tuning recommendations.
+    source: openapi/pepperdata-rest-api-openapi.yml#getJobDetails
+    id_field: j
+    dimensions: [apptype, finalstatus, appstate, namespace, workflowid]
+  - name: Metric
+    description: A named time-series metric, breakable/filterable by host, user, queue, control domain, job, and task type.
+    source: openapi/pepperdata-rest-api-openapi.yml#getMetrics
+    dimensions: [h, u, q, c, j, tt]
+relationships:
+  - from: Alarm
+    to: Threshold
+    type: has_one
+    via: threshold
+  - from: Alarm
+    to: JobDetail
+    type: belongs_to
+    via: queryParams
+    notes: An alarm's queryParams can scope to a job/app; alarms are also retrievable by app ID (/alarms/app/{appId}).
+  - from: Alarm
+    to: Metric
+    type: belongs_to
+    via: queryParams
+    notes: An alarm evaluates one or more metric series defined by its dashboard query.
+  - from: JobDetail
+    to: Metric
+    type: has_many
+    via: j
+    notes: A job's metrics are addressable on /m via the j (job sequence id) dimension.

@@ -1,0 +1,349 @@
+openapi: 3.0.3
+info:
+  title: Pepperdata REST API
+  version: '1.0'
+  description: >-
+    The Pepperdata REST API provides programmatic access to observability data
+    that is also available through the Pepperdata dashboard. You can retrieve
+    time-series metrics, series, and filters (/m), query application/job details
+    and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes
+    workloads (/jobdetails), and create, retrieve, revise, and delete alarms
+    (/alarms). All returned data is JSON unless otherwise specified.
+  contact:
+    name: Pepperdata Support
+    url: https://support.pepperdata.com/
+  x-generated: '2026-07-20'
+  x-method: generated
+  x-source: https://docs.pepperdata.com/rest-api/
+servers:
+  - url: https://dashboard.pepperdata.com/{realm}/api
+    description: >-
+      Pepperdata installation base URL. REALM is the URL segment associated with
+      the cluster/realm whose resources you are accessing.
+    variables:
+      realm:
+        default: pepperdata-demonstration
+        description: Your Pepperdata realm/cluster name.
+security:
+  - PDAPIAuth: []
+tags:
+  - name: Alarms
+    description: Create, retrieve, revise, and delete metric alarms.
+  - name: Job Details
+    description: Query application/job details, counters, and tuning recommendations.
+  - name: Metrics
+    description: Retrieve time-series metrics, series, and filters.
+paths:
+  /alarms:
+    get:
+      operationId: listAlarms
+      tags: [Alarms]
+      summary: List configured alarms
+      description: Retrieve a list of configured alarms in JSON format for the realm.
+      responses:
+        '200':
+          description: An array of alarm objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAlarm
+      tags: [Alarms]
+      summary: Create an alarm
+      description: Create an alarm for the realm.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Alarm'
+      responses:
+        '200':
+          description: The created alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /alarms/status:
+    get:
+      operationId: listFiringAlarms
+      tags: [Alarms]
+      summary: List firing alarms
+      description: Retrieve a list of firing (active) alarms.
+      responses:
+        '200':
+          description: An array of firing alarm objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /alarms/app/{appId}:
+    get:
+      operationId: listAlarmsByApp
+      tags: [Alarms]
+      summary: List alarms for an app/job
+      description: Retrieve a list of alarms associated with a specific app/job ID.
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The app/job ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of alarm objects for the app.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /alarms/{alarmId}:
+    get:
+      operationId: getAlarm
+      tags: [Alarms]
+      summary: Get an alarm
+      description: Retrieve the configuration of a specific alarm by ID.
+      parameters:
+        - $ref: '#/components/parameters/AlarmId'
+      responses:
+        '200':
+          description: The alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateAlarm
+      tags: [Alarms]
+      summary: Revise an alarm
+      description: >-
+        Revise an existing alarm. For fields that should remain unchanged, match
+        the alarm's existing values exactly; omitted fields are overwritten with
+        their defaults.
+      parameters:
+        - $ref: '#/components/parameters/AlarmId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Alarm'
+      responses:
+        '200':
+          description: The updated alarm object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAlarm
+      tags: [Alarms]
+      summary: Delete an alarm
+      description: Delete an alarm by ID.
+      parameters:
+        - $ref: '#/components/parameters/AlarmId'
+      responses:
+        '200':
+          description: The alarm was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /jobdetails:
+    get:
+      operationId: getJobDetails
+      tags: [Job Details]
+      summary: Query application/job details
+      description: >-
+        Retrieve application/job details for the realm. By default the response
+        contains the most recent apps. All access is via HTTP GET with query
+        arguments. Paginate large result sets with filterjobidsafter.
+      parameters:
+        - { name: s, in: query, description: 'Start time of query. Absolute (2020/07/20-05:54), relative (1h), or timestamp (1595163240000).', schema: { type: string } }
+        - { name: e, in: query, description: 'End time of the query. Defaults to current time.', schema: { type: string } }
+        - { name: tzo, in: query, description: 'Time zone offset in hours (e.g. PDT: -7).', schema: { type: integer } }
+        - { name: j, in: query, description: 'Filter by job IDs (comma-separated).', schema: { type: string } }
+        - { name: apptype, in: query, description: 'Type of app.', schema: { type: string, enum: [spark, mapreduce, tez] } }
+        - { name: finalstatus, in: query, description: 'Final status of the app.', schema: { type: string, enum: [SUCCEEDED, FAILED, KILLED, ENDED] } }
+        - { name: resolvedstatus, in: query, description: 'Resolved status: first available of FINAL_STATUS or APP_STATE, otherwise INVALID.', schema: { type: string } }
+        - { name: appstate, in: query, description: 'Current status of the app.', schema: { type: string, enum: [NEW, NEW_SAVING, SUBMITTED, ACCEPTED, RUNNING, FINISHED, FAILED, KILLED] } }
+        - { name: sdelay, in: query, description: 'Minimum time (ms) in queue from submission to first container launch.', schema: { type: integer } }
+        - { name: limit, in: query, description: 'Maximum number of apps to return (max 10,000).', schema: { type: integer, maximum: 10000 } }
+        - { name: showalldetails, in: query, description: 'Set to 1 to return app profiler details (configuration properties, recommendations, counters).', schema: { type: integer, enum: [1] } }
+        - { name: recommendationsonly, in: query, description: 'Return only apps with recommendations (equivalent to recommendationsgte=low).', schema: { type: integer, enum: [1] } }
+        - { name: recommendationsgte, in: query, description: 'Filter by minimum recommendation severity.', schema: { type: string, enum: [low, moderate, severe, critical] } }
+        - { name: recommendationsmatching, in: query, description: 'Filter by specified severity levels (comma-separated: critical, severe, moderate, low, none).', schema: { type: string } }
+        - { name: fetchsparkdetails, in: query, description: 'Set to 1 for Spark driver metadata (executors, stages). Spark only; most recent 100 jobs, 1000 stages, 24 hours.', schema: { type: integer, enum: [1] } }
+        - { name: fetchtaskdetails, in: query, description: 'Set to 1 for container error exit codes (up to 50 containers with errors).', schema: { type: integer, enum: [1] } }
+        - { name: workflowid, in: query, description: 'Filter by specified workflow ID.', schema: { type: string } }
+        - { name: filterjobidsafter, in: query, description: 'Return only jobs running after the specified job ID (pagination cursor).', schema: { type: string } }
+        - { name: namespace, in: query, description: 'Filter by cluster namespace (Kubernetes only).', schema: { type: string } }
+        - { name: showmaybesettleddata, in: query, description: 'Set to 1 to include data asynchronously populated later in the metrics pipeline.', schema: { type: integer, enum: [1] } }
+      responses:
+        '200':
+          description: Job details response (array of app objects).
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /m:
+    get:
+      operationId: getMetrics
+      tags: [Metrics]
+      summary: Query metrics, series, and filters
+      description: >-
+        Retrieve time-series metrics. Add breakdowns/filters with keys such as
+        h (host), u (user), q (queue), c (control domain), j (job sequence id),
+        tt (task type); use * for a full breakdown, a literal for a filter, or
+        /regex/ for a regex match.
+      parameters:
+        - { name: s, in: query, required: true, description: 'Start time (YYYY/MM/DD-HH:mm).', schema: { type: string } }
+        - { name: e, in: query, required: true, description: 'End time (YYYY/MM/DD-HH:mm).', schema: { type: string } }
+        - { name: tzo, in: query, description: 'Time zone offset from UTC in hours.', schema: { type: integer } }
+        - { name: m, in: query, required: true, description: 'Metric to access (see Metric Definitions on the dashboard).', schema: { type: string } }
+        - { name: sample, in: query, description: 'Sample interval in ms (required if targetpoints not set). Minimum 5000.', schema: { type: integer, minimum: 5000 } }
+        - { name: targetpoints, in: query, description: 'Target number of points (required if sample not set).', schema: { type: integer } }
+        - { name: ms, in: query, description: 'Maximum series to return (default 20).', schema: { type: integer, default: 20 } }
+        - { name: nohostsreporting, in: query, description: 'Set to 1 to omit hostsreporting from the response.', schema: { type: integer, enum: [1] } }
+        - { name: omitpoints, in: query, description: 'Set to "all" to omit all datapoints.', schema: { type: string, enum: [all] } }
+        - { name: downsampler, in: query, description: 'Set to "percentile" to split a single series into percentiles by time.', schema: { type: string, enum: [percentile] } }
+        - { name: format, in: query, description: 'Response format.', schema: { type: string, enum: [json, csv], default: json } }
+        - { name: omitaggregates, in: query, description: 'Set to 1 to omit aggregate series.', schema: { type: integer, enum: [1] } }
+        - { name: dataonly, in: query, description: 'Set to 1 to omit progress updates and instrumentation data.', schema: { type: integer, enum: [1] } }
+        - { name: h, in: query, description: 'Host breakdown/filter (* / literal / /regex/).', schema: { type: string } }
+        - { name: u, in: query, description: 'User breakdown/filter.', schema: { type: string } }
+        - { name: q, in: query, description: 'Queue breakdown/filter.', schema: { type: string } }
+        - { name: c, in: query, description: 'Control-domain breakdown/filter.', schema: { type: string } }
+        - { name: j, in: query, description: 'Job-sequence-id breakdown/filter.', schema: { type: string } }
+        - { name: tt, in: query, description: 'Task-type breakdown/filter.', schema: { type: string } }
+      responses:
+        '200':
+          description: Metrics response.
+          content:
+            application/json:
+              schema:
+                type: object
+            text/csv:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    PDAPIAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API key authentication. Send the header
+        `Authorization: PDAPI <API-key-id>:<API-key-token>`. Obtain a key at
+        https://dashboard.pepperdata.com/account/apikeys and click Create API
+        Key. A key is reusable until deleted or revoked.
+  parameters:
+    AlarmId:
+      name: alarmId
+      in: path
+      required: true
+      description: Pepperdata-assigned unique alarm ID.
+      schema:
+        type: integer
+  responses:
+    BadRequest:
+      description: The request was malformed or a required alarm field was invalid.
+    Unauthorized:
+      description: Missing or invalid API key.
+    NotFound:
+      description: The requested resource was not found.
+  schemas:
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Pepperdata-assigned unique number for the alarm.
+        title:
+          type: string
+          description: User-specified alphanumeric string describing the alarm.
+        enabled:
+          type: boolean
+          default: true
+          description: Alarm enabled/disabled flag. Omit or true to enable; false to disable.
+        queryParams:
+          type: string
+          description: Dashboard query for the alarm's metrics.
+        threshold:
+          $ref: '#/components/schemas/Threshold'
+        createdTime:
+          type: string
+          readOnly: true
+          description: Time the alarm was created.
+        updatedTime:
+          type: string
+          readOnly: true
+          description: Time the alarm was most recently updated.
+        targetEmails:
+          type: string
+          description: >-
+            Comma-separated list of email override addresses to receive alert
+            notifications when the alarm fires and clears.
+      required:
+        - title
+        - queryParams
+        - threshold
+    Threshold:
+      type: object
+      description: Object containing the alarm firing criteria.
+      properties:
+        value:
+          type: number
+          format: float
+          description: Value above/below which the alarm fires (per extremumOperator).
+        windowMinutes:
+          type: integer
+          default: 5
+          description: Duration in minutes over which percentOfTime is applied.
+        percentOfTime:
+          type: integer
+          default: 1
+          minimum: 0
+          maximum: 100
+          description: Percentage of windowMinutes the metric must breach before firing.
+        extremumOperator:
+          type: string
+          enum: [MAX, MIN]
+          default: MAX
+          description: MAX for an upper threshold, MIN for a lower threshold.
+      required:
+        - value

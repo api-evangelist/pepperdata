@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/pepperdata-rest-api-openapi.yml
+docs: https://docs.pepperdata.com/rest-api/00-common-api/
+notes: >-
+  API key auth. Keys are created at https://dashboard.pepperdata.com/account/apikeys
+  (Create API Key) and sent in the Authorization header with the custom PDAPI scheme:
+  `Authorization: PDAPI <API-key-id>:<API-key-token>`. Keys are reusable until deleted
+  or revoked. All requests are HTTPS (TLS 1.2+).
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: PDAPIAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'API key authentication. Send the header `Authorization: PDAPI <API-key-id>:<API-key-token>`.
+    Obtain a key at https://dashboard.pepperdata.com/account/apikeys and click Create API Key.
+    A key is reusable until deleted or revoked.'
+  sources:
+  - openapi/pepperdata-rest-api-openapi.yml

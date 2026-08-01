@@ -1,0 +1,18 @@
+{
+  "provider": "pepperdata",
+  "sources": [
+    "pepperdata-alarms-api-openapi.yml",
+    "pepperdata-job-details-api-openapi.yml",
+    "pepperdata-metrics-api-openapi.yml"
+  ],
+  "outputs": [
+    "pepperdata-alarms-api-openapi.yml",
+    "pepperdata-job-details-api-openapi.yml",
+    "pepperdata-metrics-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

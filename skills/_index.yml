@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/pepperdata-rest-api-openapi.yml
+skills:
+  - file: pepperdata-create-alarm.md
+    name: Create a Pepperdata metric alarm
+    api: openapi/pepperdata-rest-api-openapi.yml
+    operations: [createAlarm, getAlarm, listFiringAlarms, listAlarms]
+  - file: pepperdata-analyze-job-recommendations.md
+    name: Pull Pepperdata job tuning recommendations
+    api: openapi/pepperdata-rest-api-openapi.yml
+    operations: [getJobDetails]
+  - file: pepperdata-query-metrics.md
+    name: Query Pepperdata time-series metrics
+    api: openapi/pepperdata-rest-api-openapi.yml
+    operations: [getMetrics]

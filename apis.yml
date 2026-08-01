@@ -1,26 +1,142 @@
 aid: pepperdata
 name: Pepperdata
-description: Pepperdata is a company surfaced as a portfolio company of wing-venture-capital and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Pepperdata provides dynamic Kubernetes resource optimization and observability
+  for data-intensive workloads, increasing cluster utilization, improving
+  performance, and reducing cost in real time across Spark, MapReduce, Tez, and
+  Kubernetes environments. Its REST API gives programmatic access to the same
+  observability data available in the Pepperdata dashboard: time-series metrics
+  with series breakdowns and filters (/m), application and job details including
+  counters and cost/performance tuning recommendations (/jobdetails), and full
+  CRUD over metric alarms (/alarms). Authentication uses a custom API-key header.
+  Pepperdata is a portfolio company of Wing Venture Capital.
 url: https://raw.githubusercontent.com/api-evangelist/pepperdata/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - wing-venture-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: rest-api-enriched
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://www.pepperdata.com/wp-content/uploads/2025/03/normal-logo-1200px.png
 tags:
 - Company
-apis: []
+- Observability
+- Monitoring
+- Kubernetes
+- Big Data
+- Cost Optimization
+- Metrics
+- APM
+apis:
+- aid: pepperdata:pepperdata-alarms-api
+  name: Pepperdata Alarms API
+  description: Create, retrieve, revise, and delete metric alarms.
+  humanURL: https://docs.pepperdata.com/rest-api/
+  baseURL: https://dashboard.pepperdata.com/pepperdata-demonstration/api
+  tags:
+  - Alarms
+  properties:
+  - type: OpenAPI
+    url: openapi/pepperdata-alarms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pepperdata.com/rest-api/
+  - type: APIReference
+    url: https://docs.pepperdata.com/rest-api/
+- aid: pepperdata:pepperdata-job-details-api
+  name: Pepperdata Job Details API
+  description: Query application/job details, counters, and tuning recommendations.
+  humanURL: https://docs.pepperdata.com/rest-api/
+  baseURL: https://dashboard.pepperdata.com/pepperdata-demonstration/api
+  tags:
+  - Job Details
+  properties:
+  - type: OpenAPI
+    url: openapi/pepperdata-job-details-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pepperdata.com/rest-api/
+  - type: APIReference
+    url: https://docs.pepperdata.com/rest-api/
+- aid: pepperdata:pepperdata-metrics-api
+  name: Pepperdata Metrics API
+  description: Retrieve time-series metrics, series, and filters.
+  humanURL: https://docs.pepperdata.com/rest-api/
+  baseURL: https://dashboard.pepperdata.com/pepperdata-demonstration/api
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/pepperdata-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pepperdata.com/rest-api/
+  - type: APIReference
+    url: https://docs.pepperdata.com/rest-api/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Authentication
+  url: authentication/pepperdata-authentication.yml
+- type: Conventions
+  url: conventions/pepperdata-conventions.yml
+- type: ErrorCatalog
+  url: errors/pepperdata-problem-types.yml
+- type: Conformance
+  url: conformance/pepperdata-conformance.yml
+- type: DataModel
+  url: data-model/pepperdata-data-model.yml
+- type: Packages
+  url: packages/pepperdata-packages.yml
+- type: MCPServer
+  url: mcp/pepperdata-mcp.yml
+- type: LLMsTxt
+  url: llms/pepperdata-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/pepperdata-domain-security.yml
+- type: DeveloperPortal
+  url: https://docs.pepperdata.com/
+- type: Documentation
+  url: https://docs.pepperdata.com/
+- type: APIReference
+  url: https://docs.pepperdata.com/rest-api/
+- type: Blog
+  url: https://www.pepperdata.com/blog/
+- type: Support
+  url: https://support.pepperdata.com/
+- type: Pricing
+  url: https://www.pepperdata.com/pricing/
+- type: SignUp
+  url: https://www.pepperdata.com/request-a-demo/
+- type: Login
+  url: https://dashboard.pepperdata.com/
+- type: PrivacyPolicy
+  url: https://www.pepperdata.com/legal/privacy-policy
+- type: TermsOfService
+  url: https://www.pepperdata.com/legal/privacy-policy#terms
+- type: GitHubOrganization
+  url: https://github.com/pepperdata
 - type: Website
-  url: http://pepperdata.com/
+  url: https://www.pepperdata.com/
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

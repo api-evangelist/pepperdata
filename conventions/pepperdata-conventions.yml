@@ -1,0 +1,60 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.pepperdata.com/rest-api/
+docs: https://docs.pepperdata.com/rest-api/00-common-api/
+summary: >-
+  Cross-cutting request/response semantics for the Pepperdata REST API, derived
+  from the REST API User's Guide and the OpenAPI. Access is read-heavy
+  (/m and /jobdetails are GET-only); alarms are full CRUD.
+authentication:
+  style: api-key
+  header: Authorization
+  scheme: 'PDAPI <API-key-id>:<API-key-token>'
+  ref: authentication/pepperdata-authentication.yml
+transport:
+  tls: 'TLS 1.2+ required (curl --tlsv1.2)'
+  base_url: https://dashboard.pepperdata.com/{realm}/api
+  content_type: application/json
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header is documented. Alarm writes are addressed by
+    resource ID (PUT/DELETE /alarms/{id}) rather than an idempotency contract.
+pagination:
+  style: cursor
+  endpoint: /jobdetails
+  request_param: filterjobidsafter
+  notes: >-
+    /jobdetails returns the most recent apps by default, capped by `limit`
+    (max 10,000). To page through a result set larger than the return size,
+    pass filterjobidsafter with the last seen job ID. Metrics (/m) instead
+    control volume via `sample`/`targetpoints` and `ms` (max series).
+formats:
+  default: json
+  alternatives: [csv]
+  param: format
+  notes: 'All returned data is JSON unless format=csv is requested (/m only).'
+filtering:
+  metrics_breakdowns:
+    keys: [h, u, q, c, j, tt]
+    wildcard: '*'
+    regex: '/regex/'
+    notes: 'On /m, key=* breaks down by that dimension; key=literal filters; key=/re/ regex-matches.'
+  jobdetails_filters:
+    time: [s, e, tzo]
+    selectors: [j, apptype, finalstatus, resolvedstatus, appstate, workflowid, namespace]
+encryption:
+  additional_layer: optional
+  notes: >-
+    Some installations add an application-layer encryption of sensitive strings
+    (job names, user names). Encrypted strings start with "-.." and end with
+    "._" and must be decrypted client-side with the realm's encryption key.
+  decrypt_reference: https://docs.pepperdata.com/rest-api/03-decrypt-returned-data/
+errors:
+  ref: errors/pepperdata-problem-types.yml
+  envelope: 'HTTP status codes; JSON body. No RFC 9457 problem+json documented.'
+rate_limit_signal:
+  documented: false
+  notes: >-
+    No rate-limit headers documented; the guide instead warns that small metric
+    sample intervals over long windows are expensive (minimum sample 5000 ms).
