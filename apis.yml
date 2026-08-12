@@ -91,6 +91,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/pepperdata-rest-api-overlay.yaml
 - type: Authentication
   url: authentication/pepperdata-authentication.yml
 - type: Conventions
