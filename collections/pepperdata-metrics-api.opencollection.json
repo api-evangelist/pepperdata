@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pepperdata REST Alarms Metrics API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query metrics, series, and filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dashboard.pepperdata.com/{realm}/api/m",
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Start time (YYYY/MM/DD-HH:mm)."
+              },
+              {
+                "name": "e",
+                "value": "",
+                "type": "query",
+                "description": "End time (YYYY/MM/DD-HH:mm)."
+              },
+              {
+                "name": "tzo",
+                "value": "",
+                "type": "query",
+                "description": "Time zone offset from UTC in hours."
+              },
+              {
+                "name": "m",
+                "value": "",
+                "type": "query",
+                "description": "Metric to access (see Metric Definitions on the dashboard)."
+              },
+              {
+                "name": "sample",
+                "value": "",
+                "type": "query",
+                "description": "Sample interval in ms (required if targetpoints not set). Minimum 5000."
+              },
+              {
+                "name": "targetpoints",
+                "value": "",
+                "type": "query",
+                "description": "Target number of points (required if sample not set)."
+              },
+              {
+                "name": "ms",
+                "value": "",
+                "type": "query",
+                "description": "Maximum series to return (default 20)."
+              },
+              {
+                "name": "nohostsreporting",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to omit hostsreporting from the response."
+              },
+              {
+                "name": "omitpoints",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"all\" to omit all datapoints."
+              },
+              {
+                "name": "downsampler",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"percentile\" to split a single series into percentiles by time."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              },
+              {
+                "name": "omitaggregates",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to omit aggregate series."
+              },
+              {
+                "name": "dataonly",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to omit progress updates and instrumentation data."
+              },
+              {
+                "name": "h",
+                "value": "",
+                "type": "query",
+                "description": "Host breakdown/filter (* / literal / /regex/)."
+              },
+              {
+                "name": "u",
+                "value": "",
+                "type": "query",
+                "description": "User breakdown/filter."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Queue breakdown/filter."
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "Control-domain breakdown/filter."
+              },
+              {
+                "name": "j",
+                "value": "",
+                "type": "query",
+                "description": "Job-sequence-id breakdown/filter."
+              },
+              {
+                "name": "tt",
+                "value": "",
+                "type": "query",
+                "description": "Task-type breakdown/filter."
+              }
+            ]
+          },
+          "docs": "Retrieve time-series metrics. Add breakdowns/filters with keys such as h (host), u (user), q (queue), c (control domain), j (job sequence id), tt (task type); use * for a full breakdown, a literal for a filter, or /regex/ for a regex match."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,38 +2,43 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/pepperdata-rest-api-openapi.yml
-notes: >-
-  No official Pepperdata MCP server was found. This is a candidate tool surface
-  derived one-to-one from the OpenAPI operations, for a would-be MCP server that
-  fronts the Pepperdata REST API. Auth is the PDAPI API key.
+notes: No official Pepperdata MCP server was found. This is a candidate tool surface derived one-to-one
+  from the OpenAPI operations, for a would-be MCP server that fronts the Pepperdata REST API. Auth is
+  the PDAPI API key.
 server:
   name: pepperdata
   transport: http
 tools:
-  - name: list_alarms
-    description: List configured alarms in the realm.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#listAlarms
-  - name: get_alarm
-    description: Retrieve a specific alarm by ID.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#getAlarm
-  - name: list_firing_alarms
-    description: List firing (active) alarms.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#listFiringAlarms
-  - name: list_alarms_by_app
-    description: List alarms associated with a specific app/job ID.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#listAlarmsByApp
-  - name: create_alarm
-    description: Create a metric alarm.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#createAlarm
-  - name: update_alarm
-    description: Revise an existing alarm.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#updateAlarm
-  - name: delete_alarm
-    description: Delete an alarm by ID.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#deleteAlarm
-  - name: get_job_details
-    description: Query application/job details, counters, and tuning recommendations.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#getJobDetails
-  - name: get_metrics
-    description: Retrieve time-series metrics, series, and filters.
-    source_operation: openapi/pepperdata-rest-api-openapi.yml#getMetrics
+- name: list_alarms
+  description: List configured alarms in the realm.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#listAlarms
+- name: get_alarm
+  description: Retrieve a specific alarm by ID.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#getAlarm
+- name: list_firing_alarms
+  description: List firing (active) alarms.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#listFiringAlarms
+- name: list_alarms_by_app
+  description: List alarms associated with a specific app/job ID.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#listAlarmsByApp
+- name: create_alarm
+  description: Create a metric alarm.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#createAlarm
+- name: update_alarm
+  description: Revise an existing alarm.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#updateAlarm
+- name: delete_alarm
+  description: Delete an alarm by ID.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#deleteAlarm
+- name: get_job_details
+  description: Query application/job details, counters, and tuning recommendations.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#getJobDetails
+- name: get_metrics
+  description: Retrieve time-series metrics, series, and filters.
+  source_operation: openapi/pepperdata-rest-api-openapi.yml#getMetrics
+deployment:
+  mode: none
+  verified: derived
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census

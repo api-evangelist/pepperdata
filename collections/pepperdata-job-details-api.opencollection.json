@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pepperdata REST Alarms Job Details API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query application/job details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dashboard.pepperdata.com/{realm}/api/jobdetails",
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Start time of query. Absolute (2020/07/20-05:54), relative (1h), or timestamp (1595163240000)."
+              },
+              {
+                "name": "e",
+                "value": "",
+                "type": "query",
+                "description": "End time of the query. Defaults to current time."
+              },
+              {
+                "name": "tzo",
+                "value": "",
+                "type": "query",
+                "description": "Time zone offset in hours (e.g. PDT: -7)."
+              },
+              {
+                "name": "j",
+                "value": "",
+                "type": "query",
+                "description": "Filter by job IDs (comma-separated)."
+              },
+              {
+                "name": "apptype",
+                "value": "",
+                "type": "query",
+                "description": "Type of app."
+              },
+              {
+                "name": "finalstatus",
+                "value": "",
+                "type": "query",
+                "description": "Final status of the app."
+              },
+              {
+                "name": "resolvedstatus",
+                "value": "",
+                "type": "query",
+                "description": "Resolved status: first available of FINAL_STATUS or APP_STATE, otherwise INVALID."
+              },
+              {
+                "name": "appstate",
+                "value": "",
+                "type": "query",
+                "description": "Current status of the app."
+              },
+              {
+                "name": "sdelay",
+                "value": "",
+                "type": "query",
+                "description": "Minimum time (ms) in queue from submission to first container launch."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of apps to return (max 10,000)."
+              },
+              {
+                "name": "showalldetails",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to return app profiler details (configuration properties, recommendations, counters)."
+              },
+              {
+                "name": "recommendationsonly",
+                "value": "",
+                "type": "query",
+                "description": "Return only apps with recommendations (equivalent to recommendationsgte=low)."
+              },
+              {
+                "name": "recommendationsgte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by minimum recommendation severity."
+              },
+              {
+                "name": "recommendationsmatching",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specified severity levels (comma-separated: critical, severe, moderate, low, none)."
+              },
+              {
+                "name": "fetchsparkdetails",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 for Spark driver metadata (executors, stages). Spark only; most recent 100 jobs, 1000 stages, 24 hours."
+              },
+              {
+                "name": "fetchtaskdetails",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 for container error exit codes (up to 50 containers with errors)."
+              },
+              {
+                "name": "workflowid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specified workflow ID."
+              },
+              {
+                "name": "filterjobidsafter",
+                "value": "",
+                "type": "query",
+                "description": "Return only jobs running after the specified job ID (pagination cursor)."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cluster namespace (Kubernetes only)."
+              },
+              {
+                "name": "showmaybesettleddata",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to include data asynchronously populated later in the metrics pipeline."
+              }
+            ]
+          },
+          "docs": "Retrieve application/job details for the realm. By default the response contains the most recent apps. All access is via HTTP GET with query arguments. Paginate large result sets with filterjobidsafter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

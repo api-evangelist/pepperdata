@@ -1,0 +1,1515 @@
+{
+  "item": [
+    {
+      "id": "1209816b-303a-4754-8457-77ec2e536439",
+      "name": "Alarms",
+      "description": {
+        "content": "Create, retrieve, revise, and delete metric alarms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c1a7c79-0de8-47b4-b824-16aecbbd3ab1",
+          "name": "List configured alarms",
+          "request": {
+            "name": "List configured alarms",
+            "description": {
+              "content": "Retrieve a list of configured alarms in JSON format for the realm.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42468804-3cea-4c84-a7de-698925cd8c5e",
+              "name": "An array of alarm objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"queryParams\": \"string\",\n    \"threshold\": {\n      \"value\": 1837.9898221181402,\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 7593,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"string\"\n  },\n  {\n    \"title\": \"string\",\n    \"queryParams\": \"string\",\n    \"threshold\": {\n      \"value\": 2229.4826261464764,\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 9167,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94720641-ba45-40d8-878f-861cd90f8469",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba8641bd-0c0c-4e9a-83d5-7814dcc00f63",
+          "name": "Create an alarm",
+          "request": {
+            "name": "Create an alarm",
+            "description": {
+              "content": "Create an alarm for the realm.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09d42338-9faf-4b8b-890c-0fc7dc47abae",
+              "name": "The created alarm object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"id\": 6344,\n  \"enabled\": true,\n  \"createdTime\": \"string\",\n  \"updatedTime\": \"string\",\n  \"targetEmails\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "215117fe-4e11-44d8-a2cb-940e9a3cc161",
+              "name": "The request was malformed or a required alarm field was invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0c3601d-839a-4463-a564-03e48d6089ac",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06cb3d35-0071-4116-92fe-a6cd9e288469",
+          "name": "List firing alarms",
+          "request": {
+            "name": "List firing alarms",
+            "description": {
+              "content": "Retrieve a list of firing (active) alarms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "287af84d-0b19-4f17-879b-d989f22f9694",
+              "name": "An array of firing alarm objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"<string>\",\n    \"queryParams\": \"<string>\",\n    \"threshold\": {\n      \"value\": \"<float>\",\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 8568,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"<string>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"queryParams\": \"<string>\",\n    \"threshold\": {\n      \"value\": \"<float>\",\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 7154,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eff4c3ff-06be-4e03-95be-b3aeb20a9e8b",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f1e7ff9-faff-4b75-9b72-12c57126a812",
+          "name": "List alarms for an app/job",
+          "request": {
+            "name": "List alarms for an app/job",
+            "description": {
+              "content": "Retrieve a list of alarms associated with a specific app/job ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms",
+                "app",
+                ":appId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "appId",
+                  "description": "(Required) The app/job ID."
+                },
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "024aff9f-192d-4a6c-8b72-451828fc78bd",
+              "name": "An array of alarm objects for the app.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    "app",
+                    ":appId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appId",
+                      "description": "(Required) The app/job ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"<string>\",\n    \"queryParams\": \"<string>\",\n    \"threshold\": {\n      \"value\": \"<float>\",\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 8568,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"<string>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"queryParams\": \"<string>\",\n    \"threshold\": {\n      \"value\": \"<float>\",\n      \"windowMinutes\": 5,\n      \"percentOfTime\": 1,\n      \"extremumOperator\": \"MAX\"\n    },\n    \"id\": 7154,\n    \"enabled\": true,\n    \"createdTime\": \"string\",\n    \"updatedTime\": \"string\",\n    \"targetEmails\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aba9307-0b2c-4bd9-84fd-2db2fdc97711",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    "app",
+                    ":appId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appId",
+                      "description": "(Required) The app/job ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70840d93-7492-457e-92bd-da40924a49d3",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    "app",
+                    ":appId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appId",
+                      "description": "(Required) The app/job ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfac2e2b-789a-4b0d-b9f5-2ea1c94e8800",
+          "name": "Get an alarm",
+          "request": {
+            "name": "Get an alarm",
+            "description": {
+              "content": "Retrieve the configuration of a specific alarm by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms",
+                ":alarmId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "alarmId",
+                  "description": "(Required) Pepperdata-assigned unique alarm ID."
+                },
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38f7c78a-51d7-4e98-8d3d-8c2b09484ddd",
+              "name": "The alarm object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"id\": 6344,\n  \"enabled\": true,\n  \"createdTime\": \"string\",\n  \"updatedTime\": \"string\",\n  \"targetEmails\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931a3c87-4528-4a09-9446-265e131a414e",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e262309e-e27a-4dde-a0ca-94764c98a1fd",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85811663-712c-4bd4-b884-8cb9eb4994a2",
+          "name": "Revise an alarm",
+          "request": {
+            "name": "Revise an alarm",
+            "description": {
+              "content": "Revise an existing alarm. For fields that should remain unchanged, match the alarm's existing values exactly; omitted fields are overwritten with their defaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms",
+                ":alarmId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "alarmId",
+                  "description": "(Required) Pepperdata-assigned unique alarm ID."
+                },
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64b213e9-2840-4793-9ad7-e4eb6f9fe144",
+              "name": "The updated alarm object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"id\": 6344,\n  \"enabled\": true,\n  \"createdTime\": \"string\",\n  \"updatedTime\": \"string\",\n  \"targetEmails\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8164b7cb-d329-4a99-883a-ea7ca46a1dcb",
+              "name": "The request was malformed or a required alarm field was invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3dae82f5-a412-40b0-8457-b62f27460d80",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a5eacb5-778b-4640-89dc-548bfc1a2ca8",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"queryParams\": \"<string>\",\n  \"threshold\": {\n    \"value\": \"<float>\",\n    \"windowMinutes\": 5,\n    \"percentOfTime\": 1,\n    \"extremumOperator\": \"MAX\"\n  },\n  \"enabled\": true,\n  \"targetEmails\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d31a66d7-7a2b-485a-8f90-377445289e83",
+          "name": "Delete an alarm",
+          "request": {
+            "name": "Delete an alarm",
+            "description": {
+              "content": "Delete an alarm by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alarms",
+                ":alarmId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "alarmId",
+                  "description": "(Required) Pepperdata-assigned unique alarm ID."
+                },
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6351895d-d16e-47a6-ae98-11db53d798c7",
+              "name": "The alarm was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77ea1800-8e58-4f22-9e03-2ceb0d0ab241",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdeee087-f474-4cfb-8a01-722a76a06eeb",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "alarmId",
+                      "description": "(Required) Pepperdata-assigned unique alarm ID."
+                    },
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Pepperdata realm/cluster name.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "pepperdata-demonstration",
+      "key": "realm"
+    },
+    {
+      "type": "string",
+      "value": "https://dashboard.pepperdata.com/{{realm}}/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4603d326-b514-4ff7-8f76-3ccfa5b5ae3a",
+    "name": "Pepperdata REST Alarms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pepperdata REST API provides programmatic access to observability data that is also available through the Pepperdata dashboard. You can retrieve time-series metrics, series, and filters (/m), query application/job details and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes workloads (/jobdetails), and create, retrieve, revise, and delete alarms (/alarms). All returned data is JSON unless otherwise specified.\n\nContact Support:\n Name: Pepperdata Support",
+      "type": "text/plain"
+    }
+  }
+}

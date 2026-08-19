@@ -1,0 +1,465 @@
+{
+  "item": [
+    {
+      "id": "1924eb52-0a3c-452b-a045-ac22dd8206b8",
+      "name": "Metrics",
+      "description": {
+        "content": "Retrieve time-series metrics, series, and filters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a91a391b-2f23-4e3c-a007-c0d74e9f2fd8",
+          "name": "Query metrics, series, and filters",
+          "request": {
+            "name": "Query metrics, series, and filters",
+            "description": {
+              "content": "Retrieve time-series metrics. Add breakdowns/filters with keys such as h (host), u (user), q (queue), c (control domain), j (job sequence id), tt (task type); use * for a full breakdown, a literal for a filter, or /regex/ for a regex match.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "m"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "(Required) Start time (YYYY/MM/DD-HH:mm)."
+                },
+                {
+                  "disabled": false,
+                  "key": "e",
+                  "value": "<string>",
+                  "description": "(Required) End time (YYYY/MM/DD-HH:mm)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tzo",
+                  "value": "<integer>",
+                  "description": "Time zone offset from UTC in hours."
+                },
+                {
+                  "disabled": false,
+                  "key": "m",
+                  "value": "<string>",
+                  "description": "(Required) Metric to access (see Metric Definitions on the dashboard)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sample",
+                  "value": "<integer>",
+                  "description": "Sample interval in ms (required if targetpoints not set). Minimum 5000."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetpoints",
+                  "value": "<integer>",
+                  "description": "Target number of points (required if sample not set)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ms",
+                  "value": "20",
+                  "description": "Maximum series to return (default 20)."
+                },
+                {
+                  "disabled": false,
+                  "key": "nohostsreporting",
+                  "value": "<integer>",
+                  "description": "Set to 1 to omit hostsreporting from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "omitpoints",
+                  "value": "<string>",
+                  "description": "Set to \"all\" to omit all datapoints."
+                },
+                {
+                  "disabled": false,
+                  "key": "downsampler",
+                  "value": "<string>",
+                  "description": "Set to \"percentile\" to split a single series into percentiles by time."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format."
+                },
+                {
+                  "disabled": false,
+                  "key": "omitaggregates",
+                  "value": "<integer>",
+                  "description": "Set to 1 to omit aggregate series."
+                },
+                {
+                  "disabled": false,
+                  "key": "dataonly",
+                  "value": "<integer>",
+                  "description": "Set to 1 to omit progress updates and instrumentation data."
+                },
+                {
+                  "disabled": false,
+                  "key": "h",
+                  "value": "<string>",
+                  "description": "Host breakdown/filter (* / literal / /regex/)."
+                },
+                {
+                  "disabled": false,
+                  "key": "u",
+                  "value": "<string>",
+                  "description": "User breakdown/filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Queue breakdown/filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "Control-domain breakdown/filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "j",
+                  "value": "<string>",
+                  "description": "Job-sequence-id breakdown/filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "tt",
+                  "value": "<string>",
+                  "description": "Task-type breakdown/filter."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Pepperdata realm/cluster name.",
+                  "type": "any",
+                  "value": "{{realm}}",
+                  "key": "realm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "083740ab-133a-4029-ab7b-f717e2ee8971",
+              "name": "Metrics response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tzo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sample",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "targetpoints",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ms",
+                      "value": "20"
+                    },
+                    {
+                      "key": "nohostsreporting",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "omitpoints",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "downsampler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "omitaggregates",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataonly",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "h",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "u",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "j",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "450d7ce2-5949-4fe1-9a18-6df1581aaf47",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "m"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tzo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sample",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "targetpoints",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ms",
+                      "value": "20"
+                    },
+                    {
+                      "key": "nohostsreporting",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "omitpoints",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "downsampler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "omitaggregates",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataonly",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "h",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "u",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "j",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Pepperdata realm/cluster name.",
+                      "type": "any",
+                      "value": "{{realm}}",
+                      "key": "realm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Pepperdata realm/cluster name.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "pepperdata-demonstration",
+      "key": "realm"
+    },
+    {
+      "type": "string",
+      "value": "https://dashboard.pepperdata.com/{{realm}}/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ea8ee515-0499-47a7-ba73-2d5283851f68",
+    "name": "Pepperdata REST Alarms Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pepperdata REST API provides programmatic access to observability data that is also available through the Pepperdata dashboard. You can retrieve time-series metrics, series, and filters (/m), query application/job details and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes workloads (/jobdetails), and create, retrieve, revise, and delete alarms (/alarms). All returned data is JSON unless otherwise specified.\n\nContact Support:\n Name: Pepperdata Support",
+      "type": "text/plain"
+    }
+  }
+}
