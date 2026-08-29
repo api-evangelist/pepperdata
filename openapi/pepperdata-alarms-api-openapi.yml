@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Pepperdata REST Alarms API
   version: '1.0'
@@ -171,49 +171,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    AlarmId:
-      name: alarmId
-      in: path
-      required: true
-      description: Pepperdata-assigned unique alarm ID.
-      schema:
-        type: integer
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    BadRequest:
-      description: The request was malformed or a required alarm field was invalid.
-    Unauthorized:
-      description: Missing or invalid API key.
   schemas:
-    Threshold:
-      type: object
-      description: Object containing the alarm firing criteria.
-      properties:
-        value:
-          type: number
-          format: float
-          description: Value above/below which the alarm fires (per extremumOperator).
-        windowMinutes:
-          type: integer
-          default: 5
-          description: Duration in minutes over which percentOfTime is applied.
-        percentOfTime:
-          type: integer
-          default: 1
-          minimum: 0
-          maximum: 100
-          description: Percentage of windowMinutes the metric must breach before firing.
-        extremumOperator:
-          type: string
-          enum:
-          - MAX
-          - MIN
-          default: MAX
-          description: MAX for an upper threshold, MIN for a lower threshold.
-      required:
-      - value
     Alarm:
       type: object
       properties:
@@ -248,6 +206,48 @@ components:
       - title
       - queryParams
       - threshold
+    Threshold:
+      type: object
+      description: Object containing the alarm firing criteria.
+      properties:
+        value:
+          type: number
+          format: float
+          description: Value above/below which the alarm fires (per extremumOperator).
+        windowMinutes:
+          type: integer
+          default: 5
+          description: Duration in minutes over which percentOfTime is applied.
+        percentOfTime:
+          type: integer
+          default: 1
+          minimum: 0
+          maximum: 100
+          description: Percentage of windowMinutes the metric must breach before firing.
+        extremumOperator:
+          type: string
+          enum:
+          - MAX
+          - MIN
+          default: MAX
+          description: MAX for an upper threshold, MIN for a lower threshold.
+      required:
+      - value
+  parameters:
+    AlarmId:
+      name: alarmId
+      in: path
+      required: true
+      description: Pepperdata-assigned unique alarm ID.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or a required alarm field was invalid.
   securitySchemes:
     PDAPIAuth:
       type: apiKey
