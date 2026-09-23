@@ -1,9 +1,7 @@
 {
   "provider": "pepperdata",
   "sources": [
-    "pepperdata-alarms-api-openapi.yml",
-    "pepperdata-job-details-api-openapi.yml",
-    "pepperdata-metrics-api-openapi.yml"
+    "_ae-authored/pepperdata-rest-api-openapi.yml"
   ],
   "outputs": [
     "pepperdata-alarms-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "pepperdata-alarms-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "pepperdata-job-details-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "pepperdata-metrics-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "pepperdata-rest-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "pepperdata-alarms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pepperdata-job-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pepperdata-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Pepperdata REST Alarms Metrics API
+  title: Pepperdata REST Metrics API
   version: '1.0'
   description: The Pepperdata REST API provides programmatic access to observability data that is also available through the Pepperdata dashboard. You can retrieve time-series metrics, series, and filters (/m), query application/job details and tuning recommendations for Spark, MapReduce, Tez, and Kubernetes workloads (/jobdetails), and create, retrieve, revise, and delete alarms (/alarms). All returned data is JSON unless otherwise specified.
   contact:
