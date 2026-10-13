@@ -1,0 +1,22 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://aws.amazon.com/marketplace/
+marketplace_apps: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=86236ab6-c104-41cc-8407-71be5583e5bb
+  listing_count: 2
+  apps:
+  - Pepperdata Automated Resource Optimization for Kubernetes and Amazon EMR
+  - 'Pepperdata for GPUs: Optimize GPU Spend and Efficiency at Scale'
+  seller_name: Pepperdata, Inc.
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
